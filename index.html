@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENTREPRENEURSHIP - Venture Building Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>ENTREPRENEURSHIP</h1>
+                <p class="logo-subtitle">Venture Building Platform</p>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#submit-idea">Submit Idea</a></li>
+                <li><a href="#opportunities">Opportunities</a></li>
+                <li><a href="#login">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2>Great Ideas Shouldn't Die Because of Lack of Capital</h2>
+            <p>ENTREPRENEURSHIP discovers promising ideas, validates opportunities, builds business cases and connects viable ventures with the capital and resources needed to grow.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollTo('submit-idea')">Submit Your Idea</button>
+                <button class="btn btn-secondary" onclick="scrollTo('opportunities')">Explore Opportunities</button>
+                <button class="btn btn-secondary" onclick="scrollTo('how-it-works')">How It Works</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About ENTREPRENEURSHIP</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>🚀 The Problem</h3>
+                    <p>Young entrepreneurs have promising ideas but lack capital, expertise, connections, and resources to turn them into real businesses.</p>
+                </div>
+                <div class="about-card">
+                    <h3>💡 Our Solution</h3>
+                    <p>We evaluate ideas, conduct deep research, develop business cases, and help build viable ventures through our venture-building model.</p>
+                </div>
+                <div class="about-card">
+                    <h3>🤝 The Ecosystem</h3>
+                    <p>We connect Idea Owners (X) with our platform (ENTREPRENEURSHIP) and Capital Providers (Z) to create real businesses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2>How ENTREPRENEURSHIP Works</h2>
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <div class="step-number">1</div>
+                    <h3>Idea Submission</h3>
+                    <p>Submit your business idea with details about the problem, solution, market and capital needs.</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-number">2</div>
+                    <h3>Initial Screening</h3>
+                    <p>Our team reviews your idea to determine if it deserves deeper investigation.</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-number">3</div>
+                    <h3>Deep Research</h3>
+                    <p>We conduct market research, validate demand, analyze competitors and risks.</p>
+                </div>
+            </div>
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <div class="step-number">4</div>
+                    <h3>Business Development</h3>
+                    <p>We create a complete business plan, financial model and investment proposal.</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-number">5</div>
+                    <h3>Funding</h3>
+                    <p>Approved opportunities are presented to our network of capital providers.</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-number">6</div>
+                    <h3>Venture Building</h3>
+                    <p>We help build the business: registration, location, hiring, operations and growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="stats">
+        <div class="container">
+            <div class="stat-card">
+                <h3>150+</h3>
+                <p>Ideas Submitted</p>
+            </div>
+            <div class="stat-card">
+                <h3>45</h3>
+                <p>Under Research</p>
+            </div>
+            <div class="stat-card">
+                <h3>12</h3>
+                <p>Approved Ventures</p>
+            </div>
+            <div class="stat-card">
+                <h3>5</h3>
+                <p>Funded & Operating</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Opportunities Preview -->
+    <section id="opportunities" class="opportunities">
+        <div class="container">
+            <h2>Featured Opportunities</h2>
+            <div class="opportunities-grid">
+                <!-- Sample Opportunity 1 -->
+                <div class="opportunity-card">
+                    <div class="opp-header">
+                        <h3>Modern Auto Repair & Maintenance - Kisumu</h3>
+                        <span class="status-badge status-funding">Seeking Funding</span>
+                    </div>
+                    <div class="opp-details">
+                        <p><strong>Industry:</strong> Automotive Services</p>
+                        <p><strong>Location:</strong> Kisumu, Kenya</p>
+                        <p><strong>Funding Required:</strong> KSh 5,000,000</p>
+                        <p><strong>Stage:</strong> Business Development Complete</p>
+                        <p class="description">A professional automobile repair and maintenance service addressing underserved customer segments with modern equipment and trained technicians.</p>
+                    </div>
+                    <div class="opp-footer">
+                        <button class="btn btn-small" onclick="viewOpportunity(1)">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Sample Opportunity 2 -->
+                <div class="opportunity-card">
+                    <div class="opp-header">
+                        <h3>Eco-Friendly Packaging Solutions</h3>
+                        <span class="status-badge status-research">Under Research</span>
+                    </div>
+                    <div class="opp-details">
+                        <p><strong>Industry:</strong> Sustainable Manufacturing</p>
+                        <p><strong>Location:</strong> Nairobi, Kenya</p>
+                        <p><strong>Funding Required:</strong> KSh 3,500,000</p>
+                        <p><strong>Stage:</strong> Market Research</p>
+                        <p class="description">Biodegradable packaging solutions for e-commerce businesses with strong demand from growing online retailers.</p>
+                    </div>
+                    <div class="opp-footer">
+                        <button class="btn btn-small" onclick="viewOpportunity(2)">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Sample Opportunity 3 -->
+                <div class="opportunity-card">
+                    <div class="opp-header">
+                        <h3>Tech Training Academy - Youth Skills</h3>
+                        <span class="status-badge status-approved">Approved</span>
+                    </div>
+                    <div class="opp-details">
+                        <p><strong>Industry:</strong> Education & Training</p>
+                        <p><strong>Location:</strong> Kampala, Uganda</p>
+                        <p><strong>Funding Required:</strong> KSh 2,800,000</p>
+                        <p><strong>Stage:</strong> Business Development Complete</p>
+                        <p class="description">Affordable coding and digital skills training for young people with placement guarantee and industry partnerships.</p>
+                    </div>
+                    <div class="opp-footer">
+                        <button class="btn btn-small" onclick="viewOpportunity(3)">View Details</button>
+                    </div>
+                </div>
+            </div>
+            <div class="view-all-button">
+                <button class="btn btn-primary" onclick="window.location.href='opportunities.html'">View All Opportunities</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section id="submit-idea" class="cta">
+        <div class="container">
+            <h2>Ready to Turn Your Idea Into a Real Business?</h2>
+            <p>Join ENTREPRENEURSHIP and get access to research, development, expertise and capital.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary btn-large" onclick="window.location.href='submit-idea.html'">Submit Your Idea Now</button>
+                <button class="btn btn-secondary btn-large" onclick="window.location.href='login.html'">Sign In</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ENTREPRENEURSHIP</h4>
+                    <p>Turning promising ideas into real businesses through venture building.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Everyone</h4>
+                    <ul>
+                        <li><a href="submit-idea.html">Submit an Idea</a></li>
+                        <li><a href="opportunities.html">Browse Opportunities</a></li>
+                        <li><a href="login.html">Sign In</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ENTREPRENEURSHIP. All rights reserved. | Prototype Version</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
