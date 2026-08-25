@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrepreneur Dashboard - ENTREPRENEURSHIP</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+            background-color: var(--secondary-color);
+        }
+        .dashboard-sidebar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 1.5rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .dashboard-sidebar h3 {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        .sidebar-menu {
+            list-style: none;
+        }
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+        .sidebar-menu a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        .sidebar-logout {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .sidebar-logout button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .sidebar-logout button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .dashboard-content {
+            padding: 2rem;
+        }
+        .dashboard-header {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .dashboard-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .dashboard-header p {
+            color: var(--text-light);
+        }
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-box {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .stat-box h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .stat-box p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+        }
+        .submissions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        .submission-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+        .submission-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        .submission-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .submission-header h3 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+        .submission-header p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        .submission-details {
+            padding: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .submission-details p {
+            margin: 0.75rem 0;
+            color: var(--text-light);
+        }
+        .submission-details strong {
+            color: var(--text-dark);
+        }
+        .submission-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 0.75rem;
+        }
+        .submission-footer button {
+            flex: 1;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .empty-state {
+            background-color: white;
+            padding: 3rem 2rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            color: var(--text-light);
+        }
+        .empty-state h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        .empty-state .btn {
+            margin-top: 1rem;
+        }
+        .status-badge {
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .status-under-review {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+        .status-selected-for-research {
+            background-color: #fef3c7;
+            color: #b45309;
+        }
+        .status-approved {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+        .status-rejected {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            .dashboard-sidebar {
+                position: relative;
+                height: auto;
+            }
+            .submissions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <h3>🚀 Entrepreneur</h3>
+            <ul class="sidebar-menu">
+                <li><a href="#dashboard" class="active">📊 Dashboard</a></li>
+                <li><a href="#submissions">📋 My Submissions</a></li>
+                <li><a href="#profile">👤 Profile</a></li>
+                <li><a href="#messages">💬 Messages</a></li>
+                <li><a href="submit-idea.html">✨ Submit New Idea</a></li>
+            </ul>
+            <div class="sidebar-logout">
+                <button onclick="logout()">🚪 Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <!-- Header -->
+            <div class="dashboard-header">
+                <h1>Welcome, <span id="user-name">Entrepreneur</span>!</h1>
+                <p id="user-email">your@email.com</p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="dashboard-stats">
+                <div class="stat-box">
+                    <h3 id="total-ideas">0</h3>
+                    <p>Total Ideas Submitted</p>
+                </div>
+                <div class="stat-box">
+                    <h3 id="under-review-count">0</h3>
+                    <p>Under Review</p>
+                </div>
+                <div class="stat-box">
+                    <h3 id="approved-count">0</h3>
+                    <p>Approved for Research</p>
+                </div>
+                <div class="stat-box">
+                    <h3>25-35%</h3>
+                    <p>Expected ROI (Approved)</p>
+                </div>
+            </div>
+
+            <!-- My Submissions Section -->
+            <section id="submissions">
+                <h2 class="section-title">📋 My Idea Submissions</h2>
+                <div id="submissions-container" class="submissions-grid">
+                    <!-- Submissions will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Next Steps Section -->
+            <section>
+                <h2 class="section-title">📈 Next Steps</h2>
+                <div class="submission-card">
+                    <div class="submission-header">
+                        <div>
+                            <h3>How Our Process Works</h3>
+                            <p>Timeline for your idea</p>
+                        </div>
+                    </div>
+                    <div class="submission-details">
+                        <p><strong>Stage 1: Initial Screening</strong><br>Our team reviews your submission (5-7 days)</p>
+                        <p><strong>Stage 2: Deep Research</strong><br>We conduct market validation and due diligence (2-4 weeks)</p>
+                        <p><strong>Stage 3: Business Development</strong><br>We create a complete business plan and financial model (3-4 weeks)</p>
+                        <p><strong>Stage 4: Funding</strong><br>Approved opportunities are presented to our investor network (2-6 weeks)</p>
+                        <p><strong>Stage 5: Venture Building</strong><br>We help register and launch your business</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resources Section -->
+            <section>
+                <h2 class="section-title">📚 Resources for You</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                    <div class="submission-card">
+                        <div class="submission-header">
+                            <div>
+                                <h3>Business Plan Template</h3>
+                            </div>
+                        </div>
+                        <div class="submission-details">
+                            <p>Download our template to draft your business plan before submission.</p>
+                            <button class="btn btn-small" style="width: 100%; margin-top: 1rem;">Download</button>
+                        </div>
+                    </div>
+                    <div class="submission-card">
+                        <div class="submission-header">
+                            <div>
+                                <h3>Financial Modeling Guide</h3>
+                            </div>
+                        </div>
+                        <div class="submission-details">
+                            <p>Learn how to create financial projections for your business.</p>
+                            <button class="btn btn-small" style="width: 100%; margin-top: 1rem;">Learn More</button>
+                        </div>
+                    </div>
+                    <div class="submission-card">
+                        <div class="submission-header">
+                            <div>
+                                <h3>Market Research Guide</h3>
+                            </div>
+                        </div>
+                        <div class="submission-details">
+                            <p>Step-by-step guide to validate your business idea in the market.</p>
+                            <button class="btn btn-small" style="width: 100%; margin-top: 1rem;">Read Guide</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section>
+                <h2 class="section-title">❓ Frequently Asked Questions</h2>
+                <div class="submission-card">
+                    <div class="submission-details">
+                        <p><strong>Q: How long does the review process take?</strong><br>
+                        A: Initial screening takes 5-7 days. If selected for research, the full process takes 2-3 months.</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Q: What if my idea is rejected?</strong><br>
+                        A: We provide feedback on why your idea wasn't selected and encourage reapplication with improvements.</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Q: Can I submit multiple ideas?</strong><br>
+                        A: Yes! You can submit as many ideas as you'd like. Each will be evaluated independently.</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Q: What happens when I'm approved for funding?</strong><br>
+                        A: We present your opportunity to our investor network and facilitate introductions.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function loadEntrepreneurDashboard() {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            if (!user || user.userType !== 'entrepreneur') {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const userName = user.firstName || user.email.split('@')[0];
+            document.getElementById('user-name').textContent = userName;
+            document.getElementById('user-email').textContent = user.email;
+            
+            // Load submissions
+            const submissions = JSON.parse(localStorage.getItem('ideaSubmissions')) || [];
+            
+            // Update stats
+            document.getElementById('total-ideas').textContent = submissions.length;
+            document.getElementById('under-review-count').textContent = submissions.filter(s => s.status === 'Under Review').length;
+            document.getElementById('approved-count').textContent = submissions.filter(s => s.status === 'Selected for Research').length;
+            
+            // Display submissions
+            const submissionsHtml = submissions.length > 0 ? 
+                submissions.map(sub => `
+                    <div class="submission-card">
+                        <div class="submission-header">
+                            <div>
+                                <h3>${sub.businessName}</h3>
+                                <p>${sub.industry}</p>
+                            </div>
+                            <span class="status-badge status-${sub.status.toLowerCase().replace(/\s+/g, '-')}">${sub.status}</span>
+                        </div>
+                        <div class="submission-details">
+                            <p><strong>Location:</strong> ${sub.location}</p>
+                            <p><strong>Funding Needed:</strong> ${sub.fundingRequired}</p>
+                            <p><strong>Submitted:</strong> ${sub.submittedDate}</p>
+                            <p style="margin-top: 1rem; font-style: italic; color: var(--text-dark);">${sub.problem}</p>
+                        </div>
+                        <div class="submission-footer">
+                            <button class="btn btn-small" onclick="viewSubmissionDetail(${submissions.indexOf(sub)})">View Details</button>
+                            <button class="btn btn-small" onclick="editSubmission(${submissions.indexOf(sub)})">Edit</button>
+                        </div>
+                    </div>
+                `).join('') :
+                `<div class="empty-state">
+                    <h3>No ideas submitted yet</h3>
+                    <p>Start by submitting your first business idea. Our team will review it and help turn it into reality.</p>
+                    <a href="submit-idea.html" class="btn btn-primary">Submit Your First Idea</a>
+                </div>`;
+            
+            document.getElementById('submissions-container').innerHTML = submissionsHtml;
+        }
+
+        function viewSubmissionDetail(index) {
+            const submissions = JSON.parse(localStorage.getItem('ideaSubmissions')) || [];
+            const submission = submissions[index];
+            alert(`📋 Submission Details\n\nBusiness: ${submission.businessName}\nIndustry: ${submission.industry}\nLocation: ${submission.location}\nFunding Needed: ${submission.fundingRequired}\nStatus: ${submission.status}\n\nSubmitted: ${submission.submittedDate}`);
+        }
+
+        function editSubmission(index) {
+            alert('Edit functionality coming soon. Please contact our team for modifications to existing submissions.');
+        }
+
+        // Load dashboard on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadEntrepreneurDashboard();
+        });
+    </script>
+</body>
+</html>
