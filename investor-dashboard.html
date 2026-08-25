@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrepreneur Dashboard - ENTREPRENEURSHIP</title>
+    <title>Investor Dashboard - ENTREPRENEURSHIP</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         .dashboard-container {
@@ -73,26 +73,39 @@
             color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
-        .submissions-grid {
+        .opportunities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 1.5rem;
         }
-        .submission-card {
+        .opportunity-card {
             background-color: white;
             border-radius: 0.75rem;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
-        .submission-header {
+        .opportunity-card-header {
             padding: 1.5rem;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
         }
-        .submission-header h3 {
+        .opportunity-card-header h3 {
             color: var(--primary-color);
+        }
+        .opportunity-card-body {
+            padding: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .opportunity-card-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 0.75rem;
+        }
+        .opportunity-card-footer button {
+            flex: 1;
         }
         .status-badge {
             padding: 0.35rem 0.75rem;
@@ -100,9 +113,9 @@
             font-size: 0.8rem;
             font-weight: 600;
         }
-        .status-under-review {
-            background-color: #dbeafe;
-            color: #1e40af;
+        .status-approved {
+            background-color: #d1fae5;
+            color: #065f46;
         }
         @media (max-width: 768px) {
             .dashboard-container {
@@ -114,10 +127,10 @@
 <body>
     <div class="dashboard-container">
         <aside class="dashboard-sidebar">
-            <h3>🚀 Entrepreneur</h3>
+            <h3>💰 Investor</h3>
             <ul class="sidebar-menu">
-                <li><a href="entrepreneur-dashboard.html">📊 Dashboard</a></li>
-                <li><a href="submit-idea.html">✨ Submit New Idea</a></li>
+                <li><a href="investor-dashboard.html">📊 Dashboard</a></li>
+                <li><a href="opportunities.html">🎯 All Opportunities</a></li>
                 <li><a href="index.html">🏠 Home</a></li>
                 <li><a href="#" onclick="logout()">🚪 Logout</a></li>
             </ul>
@@ -125,34 +138,34 @@
 
         <main class="dashboard-content">
             <div class="dashboard-header">
-                <h1>Welcome, <span id="user-name">Entrepreneur</span>!</h1>
+                <h1>Welcome, <span id="user-name">Investor</span>!</h1>
                 <p id="user-email">your@email.com</p>
             </div>
 
             <div class="dashboard-stats">
                 <div class="stat-box">
-                    <h3 id="total-ideas">0</h3>
-                    <p>Total Ideas Submitted</p>
-                </div>
-                <div class="stat-box">
-                    <h3 id="under-review-count">0</h3>
-                    <p>Under Review</p>
+                    <h3>3</h3>
+                    <p>Available Opportunities</p>
                 </div>
                 <div class="stat-box">
                     <h3>25-35%</h3>
                     <p>Expected ROI</p>
                 </div>
+                <div class="stat-box">
+                    <h3>KSh 11.3M</h3>
+                    <p>Total Funding Available</p>
+                </div>
             </div>
 
-            <h2 style="font-size: 1.5rem; color: var(--primary-color); margin: 2rem 0 1rem;">My Submissions</h2>
-            <div id="submissions-container" class="submissions-grid"></div>
+            <h2 style="font-size: 1.5rem; color: var(--primary-color); margin: 2rem 0 1rem;">Available Opportunities</h2>
+            <div id="opportunities-container" class="opportunities-grid"></div>
         </main>
     </div>
 
     <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            loadEntrepreneurDashboard();
+            loadInvestorDashboard();
         });
     </script>
 </body>
