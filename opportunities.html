@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Opportunities - ENTREPRENEURSHIP</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .opportunities-page {
+            padding: 3rem 2rem;
+        }
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .page-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+        .filters-section {
+            background-color: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .filter-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+        .filter-group select,
+        .filter-group input {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            grid-column: 1 / -1;
+        }
+        .filter-buttons button {
+            padding: 0.75rem 1.5rem;
+        }
+        .results-info {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+        .opportunities-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .opp-card {
+            background: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .opp-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+        }
+        .opp-card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .opp-card-title {
+            flex: 1;
+        }
+        .opp-card-title h3 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .opp-card-title p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        .status-badge {
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .status-funding {
+            background-color: #fef3c7;
+            color: #b45309;
+        }
+        .status-research {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+        .status-approved {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+        .opp-card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+        .opp-card-body p {
+            margin: 0.75rem 0;
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+        .opp-card-body strong {
+            color: var(--text-dark);
+        }
+        .opp-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .tag {
+            background-color: var(--secondary-color);
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            color: var(--text-dark);
+        }
+        .opp-card-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .opp-card-footer button {
+            flex: 1;
+        }
+        .no-results {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-light);
+        }
+        .no-results h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        .sort-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .sort-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .sort-group label {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .sort-group select {
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>ENTREPRENEURSHIP</h1>
+                <p class="logo-subtitle">Venture Building Platform</p>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="opportunities.html">Opportunities</a></li>
+                <li><a href="submit-idea.html">Submit Idea</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Opportunities Page -->
+    <div class="container opportunities-page">
+        <div class="page-header">
+            <h1>Investment Opportunities</h1>
+            <p>Vetted business opportunities ready for growth capital</p>
+        </div>
+
+        <!-- Filters Section -->
+        <div class="filters-section">
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label for="filter-status">Filter by Status:</label>
+                    <select id="filter-status" onchange="applyFilters()">
+                        <option value="">All Statuses</option>
+                        <option value="Seeking Funding">Seeking Funding</option>
+                        <option value="Under Research">Under Research</option>
+                        <option value="Approved">Approved</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filter-industry">Filter by Industry:</label>
+                    <select id="filter-industry" onchange="applyFilters()">
+                        <option value="">All Industries</option>
+                        <option value="Automotive Services">Automotive Services</option>
+                        <option value="Sustainable Manufacturing">Sustainable Manufacturing</option>
+                        <option value="Education & Training">Education & Training</option>
+                        <option value="Technology">Technology</option>
+                        <option value="E-commerce">E-commerce</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filter-location">Filter by Location:</label>
+                    <select id="filter-location" onchange="applyFilters()">
+                        <option value="">All Locations</option>
+                        <option value="Kisumu">Kisumu, Kenya</option>
+                        <option value="Nairobi">Nairobi, Kenya</option>
+                        <option value="Kampala">Kampala, Uganda</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filter-funding">Funding Required (KSh):</label>
+                    <select id="filter-funding" onchange="applyFilters()">
+                        <option value="">Any Amount</option>
+                        <option value="0-2000000">Under 2M</option>
+                        <option value="2000000-5000000">2M - 5M</option>
+                        <option value="5000000-10000000">5M - 10M</option>
+                    </select>
+                </div>
+
+                <div class="filter-buttons">
+                    <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                    <button class="btn btn-secondary" onclick="resetFilters()">Clear Filters</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sort Section -->
+        <div class="sort-section">
+            <div class="results-info">
+                <span id="results-count">Showing all opportunities</span>
+            </div>
+            <div class="sort-group">
+                <label for="sort-by">Sort by:</label>
+                <select id="sort-by" onchange="applySorting()">
+                    <option value="newest">Newest First</option>
+                    <option value="funding-low">Funding (Low to High)</option>
+                    <option value="funding-high">Funding (High to Low)</option>
+                    <option value="stage">By Stage</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Opportunities Container -->
+        <div id="opportunities-container" class="opportunities-list"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ENTREPRENEURSHIP</h4>
+                    <p>Turning promising ideas into real businesses through venture building.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#how-it-works">How It Works</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Everyone</h4>
+                    <ul>
+                        <li><a href="submit-idea.html">Submit an Idea</a></li>
+                        <li><a href="opportunities.html">Browse Opportunities</a></li>
+                        <li><a href="login.html">Sign In</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ENTREPRENEURSHIP. All rights reserved. | Prototype Version</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Sample opportunities data (same as in script.js)
+        const allOpportunities = [
+            {
+                id: 1,
+                title: "Modern Auto Repair & Maintenance - Kisumu",
+                industry: "Automotive Services",
+                location: "Kisumu, Kenya",
+                fundingRequired: "KSh 5,000,000",
+                stage: "Business Development Complete",
+                status: "Seeking Funding",
+                description: "A professional automobile repair and maintenance service addressing underserved customer segments with modern equipment and trained technicians.",
+                marketSize: "KSh 500M+ annual market",
+                marketGrowth: "15% annual growth",
+                founderExperience: "8 years automotive experience"
+            },
+            {
+                id: 2,
+                title: "Eco-Friendly Packaging Solutions",
+                industry: "Sustainable Manufacturing",
+                location: "Nairobi, Kenya",
+                fundingRequired: "KSh 3,500,000",
+                stage: "Market Research",
+                status: "Under Research",
+                description: "Biodegradable packaging solutions for e-commerce businesses with strong demand from growing online retailers.",
+                marketSize: "KSh 200M+ potential market",
+                marketGrowth: "25% annual growth",
+                founderExperience: "5 years sustainability sector"
+            },
+            {
+                id: 3,
+                title: "Tech Training Academy - Youth Skills",
+                industry: "Education & Training",
+                location: "Kampala, Uganda",
+                fundingRequired: "KSh 2,800,000",
+                stage: "Business Development Complete",
+                status: "Approved",
+                description: "Affordable coding and digital skills training for young people with placement guarantee and industry partnerships.",
+                marketSize: "KSh 300M+ annual market",
+                marketGrowth: "20% annual growth",
+                founderExperience: "10 years education sector"
+            }
+        ];
+
+        function displayOpportunities(opportunities) {
+            const container = document.getElementById('opportunities-container');
+            
+            if (opportunities.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results" style="grid-column: 1 / -1;">
+                        <h3>No opportunities found</h3>
+                        <p>Try adjusting your filters or check back soon for new opportunities.</p>
+                        <button class="btn btn-primary" style="margin-top: 1rem;" onclick="resetFilters()">Clear Filters</button>
+                    </div>
+                `;
+                return;
+            }
+
+            const html = opportunities.map(opp => `
+                <div class="opp-card">
+                    <div class="opp-card-header">
+                        <div class="opp-card-title">
+                            <h3>${opp.title}</h3>
+                            <p>${opp.industry}</p>
+                        </div>
+                        <span class="status-badge status-${opp.status.toLowerCase().replace(/\s+/g, '-').replace('&', 'and')}">${opp.status}</span>
+                    </div>
+                    <div class="opp-card-body">
+                        <p><strong>Location:</strong> ${opp.location}</p>
+                        <p><strong>Funding Needed:</strong> ${opp.fundingRequired}</p>
+                        <p><strong>Stage:</strong> ${opp.stage}</p>
+                        <p><strong>Market Size:</strong> ${opp.marketSize}</p>
+                        <p><strong>Growth Rate:</strong> ${opp.marketGrowth}</p>
+                        <p style="margin-top: 1rem; font-style: italic; color: var(--text-dark);">${opp.description}</p>
+                        <div class="opp-tags">
+                            <span class="tag">Founded 2026</span>
+                            <span class="tag">${opp.founderExperience}</span>
+                        </div>
+                    </div>
+                    <div class="opp-card-footer">
+                        <button class="btn btn-small" onclick="viewOpportunity(${opp.id})">View Details</button>
+                        <button class="btn btn-small" onclick="expressInterest(${opp.id})">Express Interest</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            container.innerHTML = html;
+            document.getElementById('results-count').textContent = `Showing ${opportunities.length} opportunity(ies)`;
+        }
+
+        function applyFilters() {
+            const statusFilter = document.getElementById('filter-status').value;
+            const industryFilter = document.getElementById('filter-industry').value;
+            const locationFilter = document.getElementById('filter-location').value;
+            const fundingFilter = document.getElementById('filter-funding').value;
+
+            let filtered = allOpportunities.filter(opp => {
+                let match = true;
+
+                if (statusFilter && opp.status !== statusFilter) match = false;
+                if (industryFilter && opp.industry !== industryFilter) match = false;
+                if (locationFilter && !opp.location.includes(locationFilter)) match = false;
+
+                if (fundingFilter) {
+                    const [min, max] = fundingFilter.split('-').map(Number);
+                    const amount = parseInt(opp.fundingRequired.replace(/[^\d]/g, ''));
+                    if (amount < min || amount > max) match = false;
+                }
+
+                return match;
+            });
+
+            applySorting(filtered);
+        }
+
+        function applySorting(opportunities = null) {
+            if (!opportunities) {
+                opportunities = allOpportunities;
+            }
+
+            const sortBy = document.getElementById('sort-by').value;
+            const sorted = [...opportunities];
+
+            switch (sortBy) {
+                case 'funding-low':
+                    sorted.sort((a, b) => {
+                        const aAmount = parseInt(a.fundingRequired.replace(/[^\d]/g, ''));
+                        const bAmount = parseInt(b.fundingRequired.replace(/[^\d]/g, ''));
+                        return aAmount - bAmount;
+                    });
+                    break;
+                case 'funding-high':
+                    sorted.sort((a, b) => {
+                        const aAmount = parseInt(a.fundingRequired.replace(/[^\d]/g, ''));
+                        const bAmount = parseInt(b.fundingRequired.replace(/[^\d]/g, ''));
+                        return bAmount - aAmount;
+                    });
+                    break;
+                case 'stage':
+                    sorted.sort((a, b) => a.stage.localeCompare(b.stage));
+                    break;
+                default:
+                    sorted.reverse();
+            }
+
+            displayOpportunities(sorted);
+        }
+
+        function resetFilters() {
+            document.getElementById('filter-status').value = '';
+            document.getElementById('filter-industry').value = '';
+            document.getElementById('filter-location').value = '';
+            document.getElementById('filter-funding').value = '';
+            document.getElementById('sort-by').value = 'newest';
+            displayOpportunities(allOpportunities);
+        }
+
+        // Load opportunities on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            displayOpportunities(allOpportunities);
+        });
+    </script>
+</body>
+</html>
