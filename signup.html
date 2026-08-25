@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - ENTREPRENEURSHIP</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+            padding: 2rem;
+        }
+        .auth-form-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+        }
+        .auth-form-box h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .auth-form-box p {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .auth-buttons button {
+            flex: 1;
+        }
+        .auth-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-light);
+        }
+        .auth-link a {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        .demo-info {
+            background-color: #f0f4f8;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--info-color);
+        }
+        .demo-info strong {
+            color: var(--info-color);
+        }
+        .user-type-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .user-type-option {
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .user-type-option input {
+            display: none;
+        }
+        .user-type-option input:checked + label {
+            color: var(--primary-color);
+        }
+        .user-type-option:has(input:checked) {
+            border-color: var(--primary-color);
+            background-color: rgba(0, 102, 204, 0.05);
+        }
+        .user-type-option label {
+            cursor: pointer;
+            font-weight: 600;
+            margin: 0;
+        }
+        .user-type-option p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-form-box">
+            <h2>Create Account</h2>
+            <p>Join ENTREPRENEURSHIP today</p>
+            
+            <div class="demo-info">
+                <strong>Demo Mode:</strong> All accounts work for testing purposes
+            </div>
+
+            <form id="signup-form" onsubmit="handleSignup(event)">
+                <!-- User Type Selection -->
+                <label style="font-weight: 600; margin-bottom: 0.75rem; display: block;">Who are you?</label>
+                <div class="user-type-selector">
+                    <div class="user-type-option">
+                        <input type="radio" id="type-entrepreneur" name="userType" value="entrepreneur" required>
+                        <label for="type-entrepreneur">
+                            🚀 Entrepreneur
+                            <p>Idea Owner</p>
+                        </label>
+                    </div>
+                    <div class="user-type-option">
+                        <input type="radio" id="type-investor" name="userType" value="investor" required>
+                        <label for="type-investor">
+                            💰 Investor
+                            <p>Capital Provider</p>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Name -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" placeholder="John" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" placeholder="Doe" required>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com" required>
+                </div>
+
+                <!-- Phone -->
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="+254 7XX XXX XXX" required>
+                </div>
+
+                <!-- Location -->
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" placeholder="City, Country" required>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+
+                <!-- Terms -->
+                <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <input type="checkbox" id="terms" required style="width: auto; margin: 0;">
+                    <label for="terms" style="margin: 0;">I agree to the Terms of Service</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem; margin-top: 1rem;">Create Account</button>
+            </form>
+
+            <div class="auth-link">
+                Already have an account? <a href="login.html">Sign in</a>
+            </div>
+
+            <div class="auth-link" style="margin-top: 1rem;">
+                <a href="index.html">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            const formData = {
+                firstName: document.getElementById('first-name').value,
+                lastName: document.getElementById('last-name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                location: document.getElementById('location').value,
+                userType: document.querySelector('input[name="userType"]:checked').value,
+                signupDate: new Date().toLocaleDateString()
+            };
+            
+            // Store in localStorage for demo purposes
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            users.push(formData);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            // Auto-login
+            localStorage.setItem('currentUser', JSON.stringify({
+                email: formData.email,
+                firstName: formData.firstName,
+                userType: formData.userType,
+                loginTime: new Date()
+            }));
+            
+            alert(`✅ Welcome ${formData.firstName}!\n\nYour account has been created successfully.`);
+            
+            if (formData.userType === 'entrepreneur') {
+                window.location.href = 'entrepreneur-dashboard.html';
+            } else {
+                window.location.href = 'investor-dashboard.html';
+            }
+        }
+    </script>
+</body>
+</html>
